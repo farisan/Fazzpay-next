@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
 
 
+// import css
 import css from "../../styles/Reset.module.css"
 
 // import component
 import Dashboard from '../../components/dashboard/Dashboard'
+import { useRouter } from 'next/router';
+import axios from 'axios';
 
 function Reset() {
+
+    const router = useRouter();
 
     const [type, setType] = useState("password");
     const [icon, setIcon] = useState("fa-solid fa-eye-slash");
     const [type_, setType_] = useState("password");
     const [icon_, setIcon_] = useState("fa-solid fa-eye-slash");
+    const [password, setPassword] = useState()
+    const [confirm, setConfirm] = useState()
 
 
 
@@ -37,6 +44,24 @@ function Reset() {
         }
     }
 
+    const valuePassword = (e) => {
+        setPassword(e.target.value)
+    }
+
+    const valueConfirm = (e) => {
+        setConfirm(e.target.value);
+    }
+
+    const resetPassword = () => {
+        axios.patch("https://fazzpay-rose.vercel.app/auth/reset-password", {
+            keysChangePassword: parseInt(router.query.otp),
+            newPassword: password,
+            confirmPassword: confirm,
+        })
+            .then(console.log("success"))
+            .catch((error) => console.log(error.response.data.msg))
+    }
+
     return (
         <>
             <p className={css.title_phone}>FazzPay</p>
@@ -46,7 +71,7 @@ function Reset() {
 
                 {/* Content Right */}
                 <div className={css.content_right}>
-                    <form className={css.content_form}>
+                    <div className={css.content_form}>
                         <h2 className={css.title_bar_1}>Did You Forgot Your Password? Don`t Worry, You Can Reset Your Password In a Minutes.</h2>
                         <p className={css.title_bar_2}>To reset your password, you must type your e-mail and we will send a link to your email and you will be directed to the reset password screens.</p>
                         <div className={css.phone_view}>
@@ -55,16 +80,26 @@ function Reset() {
                         </div>
                         <div className={css.password}>
                             <i className="fa-solid fa-lock"></i>
-                            <input type={type} name="" id="" placeholder='Enter your password' />
+                            <input
+                                type={type}
+                                name="newPassword"
+                                id=""
+                                onChange={valuePassword}
+                                placeholder='Create new password' />
                             <i className={icon} onClick={handleToggle1}></i>
                         </div>
                         <div className={css.password}>
                             <i className="fa-solid fa-lock"></i>
-                            <input type={type_} name="" id="" placeholder='Enter your password' />
+                            <input
+                                type={type_}
+                                name="confirmPassword"
+                                id=""
+                                onChange={valueConfirm}
+                                placeholder='Confirm new password' />
                             <i className={icon_} onClick={handleToggle2}></i>
                         </div>
-                        <button className={css.confirm}>Reset Password</button>
-                    </form>
+                        <button className={css.confirm} onClick={resetPassword}>Reset Password</button>
+                    </div>
                 </div>
             </div>
         </>
