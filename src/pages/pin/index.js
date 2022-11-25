@@ -8,6 +8,8 @@ import css from "../../styles/Pin.module.css"
 import Dashboard from '../../components/dashboard/Dashboard'
 
 function Pin() {
+
+
     return (
         <>
 
@@ -28,19 +30,19 @@ function Pin() {
 
                         <div className={css.pin}>
                             <div className={css.box_pin}>
-                                <input type="text" name="" id="" maxlength="1" />
+                                <input className='inputs' type="text" name="" id="" maxlength="1" />
                             </div>
                             <div className={css.box_pin}>
-                                <input type="text" name="" id="" maxlength="1" />
+                                <input className='inputs' type="text" name="" id="" maxlength="1" />
                             </div>
                             <div className={css.box_pin}>
-                                <input type="text" name="" id="" maxlength="1" />
+                                <input className='inputs' type="text" name="" id="" maxlength="1" />
                             </div>
                             <div className={css.box_pin}>
-                                <input type="text" name="" id="" maxlength="1" />
+                                <input className='inputs' type="text" name="" id="" maxlength="1" />
                             </div>
                             <div className={css.box_pin}>
-                                <input type="text" name="" id="" maxlength="1" />
+                                <input className='inputs' type="text" name="" id="" maxlength="1" />
                             </div>
                         </div>
 
