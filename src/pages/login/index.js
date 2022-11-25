@@ -18,18 +18,21 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 function Login() {
 
     const dispacth = useDispatch();
     const router = useRouter()
 
-    // const errorMessage = useSelector((state) => state.auth.error);
+    const errorMessage = useSelector((state) => state.auth.error);
     // const error = useSelector((state) => state.auth.isError);
 
     const [body, setBody] = useState({});
     const [type, setType] = useState("password")
     const [icon, setIcon] = useState("fa-solid fa-eye-slash")
+    const [input, setInput] = useState(true)
+    const [inputpending, setInputpending] = useState(true)
 
 
     // handleToggle => Show Password
@@ -44,19 +47,40 @@ function Login() {
     }
 
 
-    const changeHandler = (e) =>
-        setBody({ ...body, [e.target.name]: e.target.value });
+    const changeHandler = (e) => (
+        setInputpending(false),
+        setInput(true),
+        setBody({ ...body, [e.target.name]: e.target.value })
+    )
 
 
     const postLogin = () => {
 
-        if (!body.email || !body.password) return toast.error("Data cannot be empty")
-        dispacth(loginActions.loginThunk(body));
-        if (Cookies.get("pin") === null) {
-            router.push("/pin")
-        } else {
-            router.push("/resetpassword")
-        }
+        if (!body.email || !body.password)
+            return (
+                setInput(false),
+                setInputpending(false),
+                toast.error("Data cannot be empty")
+            )
+        axios.post("https://fazzpay-rose.vercel.app/auth/login", body)
+            .then((response) => {
+                Cookies.set("id", response.data.data.id)
+                Cookies.set("token", response.data.data.token)
+                Cookies.set("pin", response.data.data.pin)
+                toast.success("Success Login")
+                setTimeout(() => {
+                    if (Cookies.get("pin") === "null") {
+                        return router.replace("/pin")
+                    } else {
+                        return router.replace("/resetpassword")
+                    }
+                }, 2000)
+            })
+            .catch((error) => (
+                setInput(false),
+                setInputpending(false),
+                toast.error(error.response.data.msg)
+            ))
     };
 
 
@@ -78,7 +102,7 @@ function Login() {
                             <p className={css.title_bar_2_phone}>Login to your existing account to access all the features in FazzPay.</p>
                         </div>
                         <div className={css.email}>
-                            <i className="fa-regular fa-envelope"></i>
+                            <i className={`fa-regular fa-envelope ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type="email"
                                 name="email"
@@ -87,7 +111,7 @@ function Login() {
                                 placeholder='Enter your e-mail' />
                         </div>
                         <div className={css.password}>
-                            <i className="fa-solid fa-lock"></i>
+                            <i className={`fa-solid fa-lock ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type={type}
                                 name="password"
