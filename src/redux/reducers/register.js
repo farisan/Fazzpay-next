@@ -37,6 +37,7 @@ const registerReducer = (prevState = initialState, { type, payload }) => {
                 isError: false,
                 isFulfilled: true,
                 isfield: false,
+                error: null,
             };
         default:
             return prevState;

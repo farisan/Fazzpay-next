@@ -26,7 +26,7 @@ const registerThunk = (body, router, cbError) => {
             if (typeof router === "function") router();
         } catch (error) {
             dispacth(registerRejected(error));
-            if (typeof navigate === "function") cbError();
+            if (typeof router === "function") cbError();
         }
     };
 };

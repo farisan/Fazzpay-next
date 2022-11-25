@@ -1,10 +1,6 @@
 import { ActionType } from "redux-promise-middleware";
 import { login } from "../../utils/axios";
 import { ACTION_STRING } from "./actionStrings";
-import Cookies from 'js-cookie'
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-// import { useRouter } from 'next/router';
 
 const { Pending, Rejected, Fulfilled } = ActionType;
 
@@ -21,23 +17,16 @@ const loginFulfilled = (data) => ({
     payload: { data },
 });
 
-
-
-const loginThunk = (body) => {
-
+const loginThunk = (body, router, cbError) => {
     return async (dispacth) => {
         try {
-
             dispacth(loginPending());
             const result = await login(body);
             dispacth(loginFulfilled(result.data));
-            Cookies.set("id", result.data.data.id)
-            Cookies.set("token", result.data.data.token)
-            Cookies.set("pin", result.data.data.pin)
-            return toast.success(`Login Success`);
+            if (typeof router === "function") router();
         } catch (error) {
             dispacth(loginRejected(error));
-            toast.error("Email / Account not registed");
+            if (typeof navigate === "function") cbError();
         }
     };
 };
