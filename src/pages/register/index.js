@@ -23,34 +23,57 @@ function Register() {
     const router = useRouter()
 
     const errorMessage = useSelector((state) => state.register.error);
-    const errorfield = useSelector((state) => state.register.isfield);
 
 
     // State
     const [body, setBody] = useState({});
     const [type, setType] = useState("password")
     const [icon, setIcon] = useState("fa-solid fa-eye-slash")
+    const [input, setInput] = useState(true)
+    const [inputpending, setInputpending] = useState(true)
+    const [inputemail, setInputemail] = useState(true)
+    const [inputpendingemail, setInputpendingemail] = useState(true)
 
 
 
     // changeHandler => ambil data inputan
-    const changeHandler = (e) =>
-        setBody({ ...body, [e.target.name]: e.target.value });
+    const changeHandler = (e) => (
+        setInputpending(false),
+        setInput(true),
+        setInputpendingemail(false),
+        setInputemail(true),
+        setBody({ ...body, [e.target.name]: e.target.value })
+    )
 
 
 
     // postRegister => register data user
     const postRegister = () => {
         if (!body.email || !body.password || !body.lastName || !body.firstName)
-            return toast.error("Data cannot be empty")
+            return (
+                setInput(false),
+                setInputpending(false),
+                setInputemail(false),
+                setInputpendingemail(false),
+                toast.error("Data cannot be empty")
+            )
         return dispacth(
             registerActions.registerThunk(
                 body,
-                () => {
-                    toast.success(`register success ${body.firstName} please login`);
-                    router.push("/login")
-                },
-                toast.error(errorMessage)
+                () => (
+                    toast.success(`register success ${body.firstName}`),
+                    toast.success(`Please Check your email to verification`),
+                    setInputpending(true),
+                    setInputpendingemail(true),
+                    setTimeout(() => router.push("/login"), 3000)
+                ),
+                () => (
+                    toast.error(errorMessage),
+                    setInputemail(false),
+                    setInputpendingemail(false),
+                    setInput(true),
+                    setInputpending(true)
+                )
             )
         );
     };
@@ -88,7 +111,7 @@ function Register() {
                         <h2 className={css.title_bar_1}>Start Accessing Banking Needs With All Devices and All Platforms With 30.000+ Users</h2>
                         <p className={css.title_bar_2}>Transfering money is eassier than ever, you can access FazzPay wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!</p>
                         <div className={css.firstname}>
-                            <i className={`fa-solid fa-user ${(errorfield === null) ? "text-secondary" : (errorfield) ? "text-primary" : "text-primary"}`}></i>
+                            <i className={`fa-solid fa-user ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type="text"
                                 name="firstName"
@@ -97,7 +120,7 @@ function Register() {
                                 placeholder='Enter your firstname' />
                         </div>
                         <div className={css.lastname}>
-                            <i className={`fa-solid fa-user ${(errorfield === null) ? "text-secondary" : (errorfield) ? "text-primary" : "text-primary"}`}></i>
+                            <i className={`fa-solid fa-user ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type="text"
                                 name="lastName"
@@ -106,7 +129,7 @@ function Register() {
                                 placeholder='Enter your lastname' />
                         </div>
                         <div className={css.email}>
-                            <i className={`fa-regular fa-envelope ${(errorfield === null) ? "text-secondary" : (errorfield) ? "text-danger" : "text-primary"}`}></i>
+                            <i className={`fa-regular fa-envelope ${(inputpendingemail) ? "text-secondary" : (inputemail) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type="email"
                                 name="email"
@@ -115,7 +138,7 @@ function Register() {
                                 placeholder='Enter your e-mail' />
                         </div>
                         <div className={css.password}>
-                            <i className={`fa-solid fa-lock ${(errorfield === null) ? "text-secondary" : (errorfield) ? "text-primary" : "text-primary"}`}></i>
+                            <i className={`fa-solid fa-lock ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type={type}
                                 name="password"
@@ -133,7 +156,7 @@ function Register() {
             </div>
             <ToastContainer
                 position="top-center"
-                autoClose={2000}
+                autoClose={3000}
                 hideProgressBar={false}
                 closeOnClick={true}
                 pauseOnHover={true}
