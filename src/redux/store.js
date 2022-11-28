@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import reducers from "./reducers/index";
@@ -16,7 +15,7 @@ const store = configureStore({
         getDefaultMiddleware({
             thunk: true,
             serializableCheck: false,
-        }).concat(logger),
+        })
 });
 
 export const persistedStore = persistStore(store);

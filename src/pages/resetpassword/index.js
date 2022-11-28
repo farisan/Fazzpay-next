@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+// import css
 import css from "../../styles/Resetpassword.module.css"
 
 // import components
@@ -7,22 +8,41 @@ import Dashboard from '../../components/dashboard/Dashboard'
 import Link from 'next/link'
 import axios from 'axios'
 
+// import toastify
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Resetpassword() {
 
     const [email, setEmail] = useState("")
+    const [input, setInput] = useState(true)
+    const [inputpending, setInputpending] = useState(true)
 
-    const changeHandler = (e) =>
-        setEmail(e.target.value);
-    console.log(email)
+    const changeHandler = (e) => (
+        setInputpending(false),
+        setInput(true),
+        setEmail(e.target.value)
+    )
 
     const resetpassword = () => {
-        axios.post("https://fazzpay-rose.vercel.app/auth/forgot-password", {
+        if (!email)
+            return (
+                setInput(false),
+                setInputpending(false),
+                toast.error("Data cannot be empty")
+            )
+        axios.post(`https://fazzpay-rose.vercel.app/auth/forgot-password`, {
             email,
             linkDirect: "http://localhost:3000/resetpassword"
         })
-            .then(console.log("cek email"))
-            .catch((err) => console.log(err))
+            .then((res) =>
+                toast.success(res.data.msg)
+            )
+            .catch((err) => (
+                setInput(false),
+                setInputpending(false),
+                toast.error(err.response.data.msg)
+            ))
     }
 
     return (
@@ -42,13 +62,22 @@ function Resetpassword() {
                             <p className={css.title_bar_2_phone}>Enter your FazzPay e-mail so we can send you a password reset link.</p>
                         </div>
                         <div className={css.email}>
-                            <i className="fa-regular fa-envelope"></i>
+                            <i className={`fa-regular fa-envelope ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input type="email" name="" id="" onChange={changeHandler} placeholder='Enter your e-mail' />
                         </div>
                         <button className={css.confirm} onClick={resetpassword}>Confirm</button>
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                closeOnClick={true}
+                pauseOnHover={true}
+                draggable={true}
+                theme="light"
+            />
         </>
     )
 }

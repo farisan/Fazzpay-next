@@ -6,8 +6,11 @@ import css from "../../styles/Reset.module.css"
 
 // import component
 import Dashboard from '../../components/dashboard/Dashboard'
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import axios from 'axios';
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Reset() {
 
@@ -19,6 +22,8 @@ function Reset() {
     const [icon_, setIcon_] = useState("fa-solid fa-eye-slash");
     const [password, setPassword] = useState()
     const [confirm, setConfirm] = useState()
+    const [input, setInput] = useState(true)
+    const [inputpending, setInputpending] = useState(true)
 
 
 
@@ -45,21 +50,40 @@ function Reset() {
     }
 
     const valuePassword = (e) => {
-        setPassword(e.target.value)
+        setInputpending(false),
+            setInput(true),
+            setPassword(e.target.value)
     }
 
     const valueConfirm = (e) => {
-        setConfirm(e.target.value);
+        setInputpending(false),
+            setInput(true),
+            setConfirm(e.target.value);
     }
 
     const resetPassword = () => {
+        if (!password || !confirm)
+            return (
+                setInput(false),
+                setInputpending(false),
+                toast.error("Data cannot be empty")
+            )
         axios.patch("https://fazzpay-rose.vercel.app/auth/reset-password", {
             keysChangePassword: parseInt(router.query.otp),
             newPassword: password,
             confirmPassword: confirm,
         })
-            .then(console.log("success"))
-            .catch((error) => console.log(error.response.data.msg))
+            .then((res) => (
+                toast.success(res.data.msg),
+                setTimeout(() => (
+                    Router.push("/login")
+                ), 2000)
+            ))
+            .catch((err) => (
+                setInput(false),
+                setInputpending(false),
+                toast.error(err.response.data.msg)
+            ))
     }
 
     return (
@@ -79,7 +103,7 @@ function Reset() {
                             <p className={css.title_bar_2_phone}>Enter your FazzPay e-mail so we can send you a password reset link.</p>
                         </div>
                         <div className={css.password}>
-                            <i className="fa-solid fa-lock"></i>
+                            <i className={`fa-solid fa-lock ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type={type}
                                 name="newPassword"
@@ -89,7 +113,7 @@ function Reset() {
                             <i className={icon} onClick={handleToggle1}></i>
                         </div>
                         <div className={css.password}>
-                            <i className="fa-solid fa-lock"></i>
+                            <i className={`fa-solid fa-lock ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type={type_}
                                 name="confirmPassword"
@@ -102,6 +126,15 @@ function Reset() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+                hideProgressBar={false}
+                closeOnClick={true}
+                pauseOnHover={true}
+                draggable={true}
+                theme="light"
+            />
         </>
     )
 }

@@ -16,6 +16,8 @@ function Dashboard() {
                     <Image
                         src={pic_phone}
                         alt="Phone_Picture"
+                    // width={200}
+                    // height={600}
                     />
                     <p className={css.title_app}>App that Covering Banking Needs.</p>
                     <p className={css.title_desc}>FazzPay is an application that focussing in banking needs for all users

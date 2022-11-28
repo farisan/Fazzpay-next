@@ -3,8 +3,14 @@ import React from 'react'
 import css from "../../styles/Success.module.css"
 
 import Dashboard from '../../components/dashboard/Dashboard'
+import { useRouter } from 'next/router'
 
 function Success() {
+
+    const router = useRouter()
+
+    const toDashboard = () => router.push("/home")
+
     return (
         <>
             <p className={css.title_phone}>FazzPay</p>
@@ -21,7 +27,7 @@ function Success() {
 
 
                         {/* Action */}
-                        <button className={css.go_dashboard}>Go To Dashboard</button>
+                        <button className={css.go_dashboard} onClick={toDashboard}>Go To Dashboard</button>
                     </div>
                 </div>
             </div>

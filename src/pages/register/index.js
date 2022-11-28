@@ -27,41 +27,81 @@ function Register() {
 
     // State
     const [body, setBody] = useState({});
+    const [firstname, setFirstname] = useState("")
+    const [lastname, setLastname] = useState("")
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
     const [type, setType] = useState("password")
     const [icon, setIcon] = useState("fa-solid fa-eye-slash")
     const [input, setInput] = useState(true)
     const [inputpending, setInputpending] = useState(true)
+    const [input_, setInput_] = useState(true)
+    const [inputpending_, setInputpending_] = useState(true)
+    const [input__, setInput__] = useState(true)
+    const [inputpending__, setInputpending__] = useState(true)
     const [inputemail, setInputemail] = useState(true)
     const [inputpendingemail, setInputpendingemail] = useState(true)
 
 
 
     // changeHandler => ambil data inputan
-    const changeHandler = (e) => (
+    // const changeHandler = (e) => (
+
+    //     setInputpendingemail(false),
+    //     setInputemail(true),
+    //     setBody({ ...body, [e.target.name]: e.target.value })
+    // )
+
+    const valueFirstname = (e) => {
         setInputpending(false),
-        setInput(true),
-        setInputpendingemail(false),
+            setInput(true),
+            setFirstname(e.target.value)
+    }
+
+    const valueLastname = (e) => {
+        setInputpending_(false),
+            setInput_(true),
+            setLastname(e.target.value)
+    }
+
+    const valuePassword = (e) => {
+        setInputpending__(false),
+            setInput__(true),
+            setPassword(e.target.value)
+    }
+
+    const valueEmail = (e) => {
         setInputemail(true),
-        setBody({ ...body, [e.target.name]: e.target.value })
-    )
+            setInputpendingemail(false),
+            setEmail(e.target.value)
+    }
 
 
 
     // postRegister => register data user
     const postRegister = () => {
-        if (!body.email || !body.password || !body.lastName || !body.firstName)
+        if (!email || !password || !lastname || !firstname)
             return (
                 setInput(false),
                 setInputpending(false),
+                setInput_(false),
+                setInputpending_(false),
+                setInput__(false),
+                setInputpending__(false),
                 setInputemail(false),
                 setInputpendingemail(false),
                 toast.error("Data cannot be empty")
             )
         return dispacth(
             registerActions.registerThunk(
-                body,
+                {
+                    firstName: firstname,
+                    lastName: lastname,
+                    email: email,
+                    password: password
+                },
                 () => (
-                    toast.success(`register success ${body.firstName}`),
+                    toast.success(`register success ${firstname}`),
                     toast.success(`Please Check your email to verification`),
                     setInputpending(true),
                     setInputpendingemail(true),
@@ -72,7 +112,11 @@ function Register() {
                     setInputemail(false),
                     setInputpendingemail(false),
                     setInput(true),
-                    setInputpending(true)
+                    setInputpending(true),
+                    setInput_(true),
+                    setInputpending_(true),
+                    setInput__(true),
+                    setInputpending__(true)
                 )
             )
         );
@@ -116,16 +160,16 @@ function Register() {
                                 type="text"
                                 name="firstName"
                                 id=""
-                                onChange={changeHandler}
+                                onChange={valueFirstname}
                                 placeholder='Enter your firstname' />
                         </div>
                         <div className={css.lastname}>
-                            <i className={`fa-solid fa-user ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
+                            <i className={`fa-solid fa-user ${(inputpending_) ? "text-secondary" : (input_) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type="text"
                                 name="lastName"
                                 id=""
-                                onChange={changeHandler}
+                                onChange={valueLastname}
                                 placeholder='Enter your lastname' />
                         </div>
                         <div className={css.email}>
@@ -134,16 +178,16 @@ function Register() {
                                 type="email"
                                 name="email"
                                 id=""
-                                onChange={changeHandler}
+                                onChange={valueEmail}
                                 placeholder='Enter your e-mail' />
                         </div>
                         <div className={css.password}>
-                            <i className={`fa-solid fa-lock ${(inputpending) ? "text-secondary" : (input) ? "text-primary" : "text-danger"}`}></i>
+                            <i className={`fa-solid fa-lock ${(inputpending__) ? "text-secondary" : (input__) ? "text-primary" : "text-danger"}`}></i>
                             <input
                                 type={type}
                                 name="password"
                                 id=""
-                                onChange={changeHandler}
+                                onChange={valuePassword}
                                 placeholder='Enter your password' />
                             <i className={icon} onClick={handleToggle}></i>
                         </div>
