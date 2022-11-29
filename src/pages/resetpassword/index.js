@@ -31,7 +31,7 @@ function Resetpassword() {
                 setInputpending(false),
                 toast.error("Data cannot be empty")
             )
-        axios.post(`https://fazzpay-rose.vercel.app/auth/forgot-password`, {
+        axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/forgot-password`, {
             email,
             linkDirect: "http://localhost:3000/resetpassword"
         })

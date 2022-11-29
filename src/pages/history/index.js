@@ -26,7 +26,7 @@ function Index() {
     const getToken = Cookies.get("token");
     axios
       .get(
-        `https://fazzpay-rose.vercel.app/transaction/history?page=1&limit=10${sort}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/transaction/history?page=1&limit=10${sort}`,
         {
           headers: {
             Authorization: `Bearer ${getToken}`,

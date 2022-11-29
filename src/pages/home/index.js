@@ -66,7 +66,7 @@ function Index() {
       const getToken = Cookies.get("token");
       axios
          .get(
-            "https://fazzpay-rose.vercel.app/transaction/history?page=1&limit=4&",
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/transaction/history?page=1&limit=4&`,
             {
                headers: {
                   Authorization: `Bearer ${getToken}`,
@@ -84,7 +84,7 @@ function Index() {
       const getToken = Cookies.get("token");
       const getId = Cookies.get(`id`);
       axios
-         .get(`https://fazzpay-rose.vercel.app/dashboard/${getId}`, {
+         .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/dashboard/${getId}`, {
             headers: {
                Authorization: `Bearer ${getToken}`,
             },
@@ -104,7 +104,7 @@ function Index() {
       const getToken = Cookies.get("token");
       axios
          .post(
-            `https://fazzpay-rose.vercel.app/transaction/top-up`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/transaction/top-up`,
             {
                amount: price,
             },

@@ -38,7 +38,7 @@ function PersonalInformation() {
       const getToken = Cookies.get("token");
       axios
          .patch(
-            `https://fazzpay-rose.vercel.app/user/profile/${getId}`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${getId}`,
             { firstName, lastName },
             {
                headers: {

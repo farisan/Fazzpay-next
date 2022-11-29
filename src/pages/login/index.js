@@ -70,7 +70,7 @@ function Login() {
         toast.error("Data cannot be empty")
       );
     axios
-      .post("https://fazzpay-rose.vercel.app/auth/login", { email: email, password: pass })
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, { email: email, password: pass })
       .then((response) => {
         Cookies.set("id", response.data.data.id);
         Cookies.set("token", response.data.data.token);

@@ -34,7 +34,7 @@ function TransferID() {
     const getToken = Cookies.get("token");
     axios
       .get(
-        `https://fazzpay-rose.vercel.app/user/profile/${router.query.iduser}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${router.query.iduser}`,
         {
           headers: {
             Authorization: `Bearer ${getToken}`,

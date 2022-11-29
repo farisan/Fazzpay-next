@@ -29,7 +29,7 @@ function ChangePhoneNumber() {
     }
     axios
       .patch(
-        `https://fazzpay-rose.vercel.app/user/profile/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${id}`,
         {
           noTelp: phoneNumber,
         },

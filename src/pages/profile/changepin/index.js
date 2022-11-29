@@ -45,7 +45,7 @@ function ChangePin() {
       const getToken = Cookies.get("token");
       axios
          .get(
-            `https://fazzpay-rose.vercel.app/user/pin/${getpin}`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/pin/${getpin}`,
 
             {
                headers: {

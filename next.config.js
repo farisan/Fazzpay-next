@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    BACKEND_URL: process.env.NEXT_BACKEND_URL,
+    NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_BACKEND_URL,
     CLOUDINARY_LINK: process.env.CLOUDINARY_LINK,
     CLOUD: process.env.CLOUD,
   },

@@ -68,7 +68,7 @@ function Reset() {
                 setInputpending(false),
                 toast.error("Data cannot be empty")
             )
-        axios.patch("https://fazzpay-rose.vercel.app/auth/reset-password", {
+        axios.patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/reset-password`, {
             keysChangePassword: parseInt(router.query.otp),
             newPassword: password,
             confirmPassword: confirm,

@@ -42,7 +42,7 @@ function Profile() {
     const formData = new FormData();
     if (image) formData.append("image", image);
     axios
-      .patch(`https://fazzpay-rose.vercel.app/user/image/${getId}`, formData, {
+      .patch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/image/${getId}`, formData, {
         headers: {
           Authorization: `Bearer ${getToken}`,
         },
@@ -51,7 +51,7 @@ function Profile() {
         (res) => (
           console.log(res),
           toast.success(res.data.msg),
-          dispatch(authActions.userThunk(getToken,getId))
+          dispatch(authActions.userThunk(getToken, getId))
         )
       )
       .catch((err) => toast.error(err.response.data.msg));
@@ -68,7 +68,7 @@ function Profile() {
   useEffect(() => {
     const getToken = Cookies.get("token");
     const getId = Cookies.get(`id`)
-    dispatch(authActions.userThunk(getToken,getId));
+    dispatch(authActions.userThunk(getToken, getId));
   }, [dispatch]);
 
   // handleClose, handleShow => Show Modals
@@ -102,7 +102,7 @@ function Profile() {
                 className="rounded-3"
                 src={
                   display ===
-                  "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null"
+                    "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null"
                     ? `${process.env.CLOUDINARY_LINK}`
                     : display
                 }

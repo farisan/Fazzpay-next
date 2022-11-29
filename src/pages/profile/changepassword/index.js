@@ -100,7 +100,7 @@ function Changepassword() {
       )
     axios
       .patch(
-        `https://fazzpay-rose.vercel.app/user/password/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/password/${id}`,
         {
           oldPassword: password,
           newPassword: confirm,

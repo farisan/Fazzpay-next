@@ -35,7 +35,7 @@ function Pin() {
          );
       axios
          .patch(
-            `https://fazzpay-rose.vercel.app/user/pin/${id}`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/pin/${id}`,
             { pin: getpin },
             {
                headers: {

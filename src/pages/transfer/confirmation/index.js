@@ -38,7 +38,7 @@ function Confirmation() {
     const getToken = Cookies.get("token");
     axios
       .get(
-        `https://fazzpay-rose.vercel.app/user/profile/${transactions.receiverId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/user/profile/${transactions.receiverId}`,
         {
           headers: {
             Authorization: `Bearer ${getToken}`,
@@ -165,7 +165,7 @@ function Confirmation() {
                 <Image
                   src={
                     image ===
-                    "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null"
+                      "https://res.cloudinary.com/dd1uwz8eu/image/upload/v1666604839/null"
                       ? `${process.env.CLOUDINARY_LINK}`
                       : image
                   }
