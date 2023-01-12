@@ -81,7 +81,7 @@ You may also see any lint errors in the console.
 
 ## Deployment
 
-Website : [Click Here](https://e-wallet-fazzpay.vercel.app)
+Website : [Click Here](https://ewallet-fazzpay.vercel.app/)
 
 ## Screenshots App
 
