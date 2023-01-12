@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import css from "../../../styles/TransferSuccess.module.css";
 import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
+import Footer from "../../../components/footer/Footer";
 import Sidebar from "../../../components/sidebar/Sidebar";
 
 import checklist from "../../../assets/transferSuccess/success.png";

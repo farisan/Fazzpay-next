@@ -2,7 +2,7 @@ import React from "react";
 
 import css from "../../../styles/TransferFailed.module.css";
 import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
+import Footer from "../../../components/footer/Footer";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import failed from "../../../assets/transferFailed/failed.png";
 import profile from "../../../assets/sitampan.png";

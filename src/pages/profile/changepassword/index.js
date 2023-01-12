@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import css from "../../../styles/Changepassword.module.css";
 
 import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
+import Footer from "../../../components/footer/Footer";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Drawers from "../../../components/drawer/Drawer";
 import axios from "axios";

@@ -4,7 +4,7 @@ const ReactCodeInput = dynamic(import("react-code-input"));
 
 import css from "../../../styles/ChangePin.module.css";
 import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
+import Footer from "../../../components/footer/Footer";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import { useRouter } from "next/router";
 import Drawers from "../../../components/drawer/Drawer";

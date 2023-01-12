@@ -7,7 +7,7 @@ import styles from "../../../styles/Confirmation.module.css";
 //import components
 import Image from "next/image";
 import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
+import Footer from "../../../components/footer/Footer";
 import Sidebar from "../../../components/sidebar/Sidebar";
 
 //import image

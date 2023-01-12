@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import css from "../../../styles/ChangePhone.module.css";
 import Header from "../../../components/Header/Header";
-import Footer from "../../../components/Footer/Footer";
+import Footer from "../../../components/footer/Footer";
 import Sidebar from "../../../components/sidebar/Sidebar";
 import Drawers from "../../../components/drawer/Drawer";
 import Cookies from "js-cookie";
