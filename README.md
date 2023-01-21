@@ -87,11 +87,11 @@ Website : [Click Here](https://ewallet-fazzpay.vercel.app/)
 
 <table border="2">
     <div align="center">
-        <img width="300" height="250" src="./src/assets/readme/fazzpay_dashboard.png">
-        <img width="300" height="250" src="./src/assets/readme/fazzpay_tf.png">
-        <img width="300" height="250" src="./src/assets/readme/fazzpay_history.png">
-        <img width="300" height="250" src="./src/assets/readme/fazzpay_tf.png">
-        <img width="300" height="250" src="https://github.com/imbasri-dev/fazzpay-nextjs/blob/master/src/assets/Readme/Topup.png?raw=true">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_dashboard.png">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_tf.png">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_history.png">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_tf.png">
+        <img width="300" height="200" src="https://github.com/imbasri-dev/fazzpay-nextjs/blob/master/src/assets/Readme/Topup.png?raw=true">
     </div>
 </table>
 
