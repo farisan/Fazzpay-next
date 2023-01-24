@@ -87,17 +87,17 @@ Website : [Click Here](https://ewallet-fazzpay.vercel.app/)
 
 <table border="2">
     <div align="center">
-        <img width="300" height="300" src="./src/assets/readme/fazzpay_dashboard.png">
-        <img width="300" height="300" src="./src/assets/readme/fazzpay_tf.png">
-        <img width="300" height="300" src="./src/assets/readme/fazzpay_history.png">
-        <img width="300" height="300" src="./src/assets/readme/fazzpay_tf.png">
-        <img width="300" height="300" src="https://github.com/imbasri-dev/fazzpay-nextjs/blob/master/src/assets/Readme/Topup.png?raw=true">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_dashboard.png">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_tf.png">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_history.png">
+        <img width="300" height="200" src="./src/assets/readme/fazzpay_tf.png">
+        <img width="300" height="200" src="https://github.com/imbasri-dev/fazzpay-nextjs/blob/master/src/assets/Readme/Topup.png?raw=true">
     </div>
 </table>
 
 ## Related Project
 
-- Tickitz (NextJs) [`here`](https://lepisa-fe.vercel.app/)
+
 - Backend FazzPay [`here`](https://documenter.getpostman.com/view/23706970/2s8ZDR8RFJ)
 
 <p align="center"><sub><b>&copy;2022❤️Fazzpay☕</b></sub></p>
