@@ -97,7 +97,7 @@ Website : [Click Here](https://ewallet-fazzpay.vercel.app/)
 
 ## Related Project
 
-- Tickitz (NextJs) [`here`](https://lepisa-fe.vercel.app/)
+
 - Backend FazzPay [`here`](https://documenter.getpostman.com/view/23706970/2s8ZDR8RFJ)
 
 <p align="center"><sub><b>&copy;2022❤️Fazzpay☕</b></sub></p>
